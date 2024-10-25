@@ -19,7 +19,7 @@ export const GlobalProvider = ({ children }) => {
   // Actions
   async function getTransactions() {
     try {
-      const res = await axios.get('/api/v1/transactions');
+      const res = await axios.get('https://expense-tracker-lemon-ten.vercel.app/transactions');
 
       dispatch({
         type: 'GET_TRANSACTIONS',
@@ -35,7 +35,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTransaction(id) {
     try {
-      await axios.delete(`/api/v1/transactions/${id}`);
+      await axios.delete(`https://expense-tracker-lemon-ten.vercel.app/transactions/${id}`);
 
       dispatch({
         type: 'DELETE_TRANSACTION',
@@ -55,9 +55,9 @@ export const GlobalProvider = ({ children }) => {
         'Content-Type': 'application/json'
       }
     }
-
+    axios.defaults.withCredentials = true;
     try {
-      const res = await axios.post('/api/v1/transactions', transaction, config);
+      const res = await axios.post('https://expense-tracker-lemon-ten.vercel.app/transactions', transaction, config);
 
       dispatch({
         type: 'ADD_TRANSACTION',
